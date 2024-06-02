@@ -1,0 +1,7 @@
+/* @import '../node_modules/@siemens/ix/dist/siemens-ix/siemens-ix.css' */
+
+ix-col {
+  display: flex;
+  align-items: center;
+  height: 2.5rem;
+}

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + TS</title>
+  </head>
+
+  <body>
+    <ix-content>
+      <style>
+      .example {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        width: 100%;
+      }
+
+      div[data-tab-content] {
+        display: none;
+      }
+
+      div[data-tab-content].show {
+        display: block;
+      }
+      </style>
+
+      <div class="example">
+        <ix-tabs>
+          <ix-tab-item data-tab-id="0">Info</ix-tab-item>
+          <ix-tab-item data-tab-id="1">Papers</ix-tab-item>
+          <ix-tab-item data-tab-id="2">Scores</ix-tab-item>
+        </ix-tabs>
+
+        <div
+          style="padding: 10px; border: var(--theme-primary-bdr-1); border-radius: 9px;"
+          data-tab-content="0"
+          class="show">
+
+          <form class="needs-validation m-2">
+
+            <ix-input-group style="margin-bottom: 1rem">
+              <ix-typography format="label-lg">
+                <label for="parti-username">Username:</label>
+              </ix-typography>
+
+              <input id="parti-username" name="username" type="text" value="thera" readonly>
+            </ix-input-group>
+
+            <ix-input-group style="margin-bottom: 1rem">
+              <ix-typography format="label-lg">
+                <label for="parti-project">Project:</label>
+              </ix-typography>
+
+              <input id="parti-project" name="project" type="text" value="projects:g1" readonly>
+            </ix-input-group>
+
+            <div style="display: flex; flex-direction: column;">
+              <ix-typography format="label-lg">
+                <label for="parti-status">Status:</label>
+              </ix-typography>
+
+              <ix-select
+                style="margin-bottom: 1rem;"
+                id="parti-status"
+                value="active">
+
+                <ix-select-item label="Standby" value="standby"></ix-select-item>
+                <ix-select-item label="Active" value="active"></ix-select-item>
+                <ix-select-item label="Exited" value="exited"></ix-select-item>
+                <ix-select-item label="Completed" value="completed"></ix-select-item>
+              </ix-select>
+
+              <ix-button style="align-self: flex-end;" type="submit" variant="primary">Submit</ix-button>
+            </div>
+          </form>
+
+        </div>
+
+        <div
+          style="padding: 10px; border: var(--theme-primary-bdr-1); border-radius: 9px;"
+          data-tab-content="1">
+          Content Tab 2
+        </div>
+
+        <div
+          style="padding: 10px; border: var(--theme-primary-bdr-1); border-radius: 9px;"
+          data-tab-content="2">
+          Content Tab 3
+        </div>
+      </div>
+
+      <script>
+        (async function () {
+          await window.customElements.whenDefined('ix-tabs');
+          const tabs = document.querySelectorAll('ix-tab-item[data-tab-id]');
+
+          function registerClickListener(tab) {
+            tab.addEventListener('click', (tabContent) => {
+              const contentList = document.querySelectorAll('[data-tab-content]');
+              contentList.forEach((content) => {
+                if (content.dataset.tabContent === tab.dataset.tabId) {
+                  content.classList.add('show');
+                } else {
+                  content.classList.remove('show');
+                }
+              });
+            });
+          }
+
+          tabs.forEach(registerClickListener);
+        })();
+      </script>
+
+    </ix-content>
+    <script type="module" src="/main.ts"></script>
+  </body>
+</html>
